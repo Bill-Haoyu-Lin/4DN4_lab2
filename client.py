@@ -51,6 +51,7 @@ while True:
         print("decrypted_message = ", decrypted_message)
     elif data:
         print('Received data from server:', data.decode('utf-8'))
+        break
 
 
     # If the user enters "exit", close the connection

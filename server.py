@@ -100,10 +100,15 @@ while True:
             output = 'Invalid command'
         elif id not in students.keys():
             output = 'Invalid student ID ' + id
+            
         else:
             output = 'Invalid command'
 
         client_sock.sendall(output.encode('utf-8'))
+        client_sock.close()
+        server_sock.listen()
+        client_sock, addr = server_sock.accept()
+        print('Connected to client:', addr)
     # Process the command (in this example, just print it)
     print('Received command from client:', command)
 
