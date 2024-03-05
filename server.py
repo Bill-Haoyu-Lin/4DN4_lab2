@@ -57,9 +57,11 @@ while True:
     command = data.decode('utf-8')
     cmd,id = command.split(" ")
 
+    # Print Command
+    print('Received command from client:', command)
 
     if (cmd in ['GMA','GL1A','GL2A','GL3A','GL4A','GEA','GG']) and (id in students.keys()):
-
+        print("User Found")
         # Form fernet key from student key
         encryption_key_bytes = students[id].key.encode('utf-8')
         fernet = Fernet(encryption_key_bytes)
@@ -97,11 +99,15 @@ while True:
 
     else:
         if cmd not in ['GMA','GL1A','GL2A','GL3A','GL4A','GEA','GG']:
+            print("Invalid Command")
             output = 'Invalid command'
+
         elif id not in students.keys():
+            print("User Not found")
             output = 'Invalid student ID ' + id
             
         else:
+            print("Invalid Command")
             output = 'Invalid command'
 
         client_sock.sendall(output.encode('utf-8'))
@@ -109,9 +115,8 @@ while True:
         server_sock.listen()
         client_sock, addr = server_sock.accept()
         print('Connected to client:', addr)
-    # Process the command (in this example, just print it)
-    print('Received command from client:', command)
-
+    
+print("Thanks for using, Cya!")
 # Close the client socket
 client_sock.close()
 
